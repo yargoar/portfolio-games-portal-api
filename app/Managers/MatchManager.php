@@ -55,6 +55,8 @@ class MatchManager
         broadcast(new MatchMove($move));
         Log::info('MatchMove event triggered.', ['data' => $move]);
 
+
+
         return collect(Cache::get($matchCacheKey, []))->last();
     }
 
