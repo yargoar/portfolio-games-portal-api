@@ -36,7 +36,7 @@ class GameRoomController extends Controller
                 $request->position,
                 $request->isSpectator
             );
-            Log::info($room);
+            Log::info("passou no controller tranquilamente depois do GameRoomManager::joinRoom");
 
               return response()->json($room);
 

@@ -13,16 +13,19 @@ class RoomUpdated implements ShouldBroadcastNow
 
     public function __construct($room)
     {
+	Log::info("Construiu o evento room");
         $this->room = $room;
     }
 
     public function broadcastOn()
     {
+	Log::info("chamou no canal rooms");
         return new Channel('rooms');
     }
 
     public function broadcastWith()
     {
+	Log::info('broadcastou os dados');
         return [
             'id' => $this->room['id'],
             'name' => $this->room['name'],
@@ -35,6 +38,7 @@ class RoomUpdated implements ShouldBroadcastNow
     // Opcional: Nome do evento (padrão é o nome da classe)
     public function broadcastAs()
     {
+	Log::info('broadcastou como room.updated');
         return 'room.updated';
     }
 }

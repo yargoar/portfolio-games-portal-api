@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'broadcasting/auth', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://tictactoe.vue.yargo.ar'],
+    'allowed_origins' => ['https://tictactoe.vue.yargo.ar', 'wss://tictactoe.api.yargo.ar'],
 
     'allowed_origins_patterns' => [''],
 

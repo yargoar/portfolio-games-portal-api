@@ -19,6 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
+
+	$middleware->validateCsrfTokens(except: [
+            'api/*',
+	]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

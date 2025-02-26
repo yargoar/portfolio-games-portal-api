@@ -67,7 +67,7 @@ class GameRoomManager
 
     public static function joinRoom($roomId, $userId, $userName = '', $position = 0, $isSpectator = false)
     {
-        Log::info("Chega aqui");
+        Log::info("GameRoomManager join room");
         // Recupera as salas do cache ou cria uma Collection vazia
         self::getRooms();
 
@@ -77,7 +77,7 @@ class GameRoomManager
             $room['spectators'] = array_values(array_filter($room['spectators'], fn ($spectator) => $spectator['id'] != $userId));
             return $room;
         });
-        Log::info("Tira das sala tudo");
+        Log::info("Tirou o usuario de outras salas");
         // Procura a sala correta pelo ID para colocar o jogador
         $roomIndex = self::$rooms->search(fn ($r) => $r['id'] === $roomId);
 
@@ -91,7 +91,7 @@ class GameRoomManager
         // Verifica se o usuário já está na sala
         $existingPlayer = collect($room['players'])->contains('id', $userId);
         $existingSpectator = collect($room['spectators'])->contains('id', $userId);
-        Log::info("Checa se ele ta na sala, acho q nem precisava");
+        Log::info("Checa se ele está na sala que deseja entrar e retira se estiver");
         if ($existingPlayer) {
             $room['players'] = collect($room['players'])->reject(fn ($p) => $p['id'] === $userId)->toArray();
         }
@@ -119,11 +119,19 @@ class GameRoomManager
 
         // Atualiza a Collection corretamente
         self::$rooms[$roomIndex] = $room;
-
+	
         // Atualiza o cache
-        Log::info('RoomUpdated event triggered.', ['data' => $room]);
+        Log::info('Fez tudo que  tinha q fazer, atualiza as rooms no cache');
         self::setRooms();
-        broadcast(new RoomUpdated($room));
+	
+	Log::info('chama o broadcast');
+	try {
+		broadcast(new RoomUpdated($room));
+ 	} catch (Exception $e) {
+	    // Handling the exception
+	    Log::info("Caught exception: " . $e->getMessage());
+	}
+//        Log::info(broadcast(new RoomUpdated($room)));
         return $room;
     }
 
