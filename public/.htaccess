@@ -1,3 +1,8 @@
+Header set Access-Control-Allow-Origin "https://tictactoe.vue.yargo.ar"
+Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

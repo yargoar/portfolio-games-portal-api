@@ -19,19 +19,16 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'http://tictactoe.vue.yargo.ar',
-        'http://tictactoe.api.yargo.ar'
-    ],
+    'allowed_origins' => ['https://tictactoe.vue.yargo.ar'],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => [''],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['*', 'Content-Type', 'Authorization', 'Accept'],
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
